@@ -1,4 +1,8 @@
 water-test-server/config/db.config.js
 water-test-server/node_modules/
+water-test-server/.env
 water-test-ui/water-tests/node_modules
+water-test-server/run-server.bat
+water-test-ui/water-tests/run-webpage.bat
+run.bat
 .vscode

@@ -1,25 +1,26 @@
 module.exports = (app) => {
   const softwater = require("../controllers/softwater.controller.js")
+  const auth = require("../middleware/auth")
 
   var router = require("express").Router()
 
   // Create a new record
-  router.post("/", softwater.create)
+  router.post("/", auth, softwater.create)
 
   // Get latest record
-  router.get("/", softwater.getLatest)
+  router.get("/", auth, softwater.getLatest)
 
   // Retrieve all records
-  router.get("/all", softwater.findAll)
+  router.get("/all", auth, softwater.findAll)
 
   // Retrieve a single record with id
-  router.get("/:id", softwater.findOne)
+  router.get("/:id", auth, softwater.findOne)
 
   // Update a record with id
-  router.put("/:id", softwater.update)
+  router.put("/:id", auth, softwater.update)
 
   // Delete a record with id
-  router.delete("/:id", softwater.delete)
+  router.delete("/:id", auth, softwater.delete)
 
   app.use("/api/softwater", router)
 }

@@ -1,5 +1,6 @@
 const express = require("express")
 const cors = require("cors")
+require("dotenv").config()
 
 const app = express()
 
@@ -42,6 +43,7 @@ require("./routes/coolingtowerwater.routes")(app)
 require("./routes/feedwater.routes")(app)
 require("./routes/rawwater.routes")(app)
 require("./routes/softwater.routes")(app)
+require("./routes/user.routes")(app)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080

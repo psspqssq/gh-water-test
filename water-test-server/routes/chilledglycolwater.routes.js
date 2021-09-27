@@ -4,22 +4,22 @@ module.exports = (app) => {
   var router = require("express").Router()
 
   // Create a new record
-  router.post("/", chilledglycolwater.create)
+  router.post("/", auth, chilledglycolwater.create)
 
   // Get latest record
-  router.get("/", chilledglycolwater.getLatest)
+  router.get("/", auth, chilledglycolwater.getLatest)
 
   // Retrieve all records
-  router.get("/all", chilledglycolwater.findAll)
+  router.get("/all", auth, chilledglycolwater.findAll)
 
   // Retrieve a single record with id
-  router.get("/:id", chilledglycolwater.findOne)
+  router.get("/:id", auth, chilledglycolwater.findOne)
 
   // Update a record with id
-  router.put("/:id", chilledglycolwater.update)
+  router.put("/:id", auth, chilledglycolwater.update)
 
   // Delete a record with id
-  router.delete("/:id", chilledglycolwater.delete)
+  router.delete("/:id", auth, chilledglycolwater.delete)
 
   app.use("/api/chilledglycolwater", router)
 }

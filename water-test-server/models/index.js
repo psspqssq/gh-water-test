@@ -1,12 +1,11 @@
-const dbConfig = require("../config/db.config.js")
-
 const mongoose = require("mongoose")
 mongoose.Promise = global.Promise
 
 const db = {}
 db.mongoose = mongoose
 
-db.url = dbConfig.url
+db.url = process.env.DBURL
+db.user = require("./user.model.js")(mongoose)
 db.softwater = require("./softwater.model.js")(mongoose)
 db.feedwater = require("./feedwater.model.js")(mongoose)
 db.boilerwater = require("./boilerwater.model.js")(mongoose)

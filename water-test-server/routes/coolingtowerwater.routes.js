@@ -4,22 +4,22 @@ module.exports = (app) => {
   var router = require("express").Router()
 
   // Create a new record
-  router.post("/", coolingtowerwater.create)
+  router.post("/", auth, coolingtowerwater.create)
 
   // Get latest record
-  router.get("/", coolingtowerwater.getLatest)
+  router.get("/", auth, coolingtowerwater.getLatest)
 
   // Retrieve all records
-  router.get("/all", coolingtowerwater.findAll)
+  router.get("/all", auth, coolingtowerwater.findAll)
 
   // Retrieve a single record with id
-  router.get("/:id", coolingtowerwater.findOne)
+  router.get("/:id", auth, coolingtowerwater.findOne)
 
   // Update a record with id
-  router.put("/:id", coolingtowerwater.update)
+  router.put("/:id", auth, coolingtowerwater.update)
 
   // Delete a record with id
-  router.delete("/:id", coolingtowerwater.delete)
+  router.delete("/:id", auth, coolingtowerwater.delete)
 
   app.use("/api/coolingtowerwater", router)
 }
