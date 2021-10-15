@@ -12,7 +12,6 @@ exports.register = async (req, res) => {
     res.status(400).send({ message: "Content can not be empty!" })
     return
   }
-  console.log("I exist")
   const { username, password, user_type, email } = req.body
 
   if (!(email && password && user_type && email)) {
@@ -28,7 +27,7 @@ exports.register = async (req, res) => {
     email: email.toLowerCase(),
   })
   const token = jwt.sign({ user_id: user._id, username }, process.env.TOKEN, {
-    expiresIn: "2h",
+    expiresIn: "5",
   })
   user.token = token
   user
@@ -47,7 +46,7 @@ exports.login = async (req, res) => {
   try {
     const { username, password } = req.body
     if (!(username && password)) {
-      res.status(400).send("all inputs are required")
+      res.status(400).send({ message: "all inputs are required", success: false })
     }
     const user = await User.findOne({ username })
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -60,9 +59,9 @@ exports.login = async (req, res) => {
       user.token = token
 
       // user
-      res.status(200).json(user)
+      res.status(200).json({ user, success: true })
     }
-    res.status(400).send("Invalid Credentials")
+    res.status(400).send({ message: "Invalid Credentials", success: false })
   } catch (err) {
     console.log(err)
   }

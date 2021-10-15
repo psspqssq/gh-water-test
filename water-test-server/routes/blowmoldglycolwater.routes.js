@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const blowmoldglycolwater = require("../controllers/blowmoldglycolwater.controller.js")
-
+  const auth = require("../middleware/auth")
   var router = require("express").Router()
 
   // Create a new record

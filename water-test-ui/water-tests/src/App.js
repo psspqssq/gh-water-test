@@ -1,25 +1,23 @@
-import React, { useState } from "react"
+import React from "react"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
-import { Link } from "react-router-dom"
 import Login from "./Components/Login"
 import Dashboard from "./Components/Dashboard"
+import WaterTest from "./Components/WaterTest"
 import "./App.css"
+import useToken from "./Middleware/useToken"
 
 const App = () => {
-  const [token, setToken] = useState()
+  const { token, setToken } = useToken()
   if (!token) {
     return <Login setToken={setToken} />
   }
   return (
     <div className="wrapper">
-      <h1>Application</h1>
+      <Dashboard />
       <BrowserRouter>
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
+          <Route path="/watertests">
+            <WaterTest></WaterTest>
           </Route>
         </Switch>
       </BrowserRouter>

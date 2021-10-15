@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const rawwater = require("../controllers/rawwater.controller.js")
-
+  const auth = require("../middleware/auth")
   var router = require("express").Router()
 
   // Create a new record
