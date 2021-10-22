@@ -5,7 +5,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons"
 import PropTypes from "prop-types"
 
 async function loginUser(credentials) {
-  return fetch("http://192.168.1.4:8080/api/user/login/", {
+  return fetch("http://localhost:8080/api/user/login/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
