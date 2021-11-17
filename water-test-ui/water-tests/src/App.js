@@ -12,16 +12,16 @@ const App = () => {
     return <Login setToken={setToken} />
   }
   return (
-    <div className="wrapper">
-      <Dashboard />
-      <BrowserRouter>
-        <Switch>
-          <Route path="/watertests">
-            <WaterTest></WaterTest>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/">
+          <Dashboard />
+        </Route>
+        <Route exact path="/seekBoiler">
+          <WaterTest />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   )
 }
 
