@@ -4,7 +4,7 @@ import "antd/dist/antd.css"
 import { Layout } from "antd"
 const { Content } = Layout
 export const DashboardContent = () => {
-  const { selectedTab } = useContext(DashboardContext)
+  const { selectedTab, selectedMenu } = useContext(DashboardContext)
 
   return (
     <Content
@@ -16,9 +16,19 @@ export const DashboardContent = () => {
         height: 300,
       }}
     >
-      {selectedTab === 1 && <h1>Water Treatment Content</h1>}
-      {selectedTab === 2 && <h1>Chemco Inventory Content</h1>}
-      {selectedTab === 3 && <h1>Account chemco Content</h1>}
+      {selectedTab === 1 && selectedMenu === "SeekBoiler" && <h1>Boiler Seek Content </h1>}
+      {selectedTab === 1 && selectedMenu === "RegisterBoiler" && <h1>Boiler Register Content </h1>}
+
+      {selectedTab === 1 && selectedMenu === "SeekBlowmold" && <h1>Blowmold Seek Content </h1>}
+      {selectedTab === 1 && selectedMenu === "RegisterBlowmold" && <h1>Blowmold Register Content </h1>}
+
+      {selectedTab === 1 && selectedMenu === "SeekCoolingTower" && <h1>Cooling Towers Seek Content </h1>}
+      {selectedTab === 1 && selectedMenu === "RegisterCoolingTower" && <h1>Cooling Towers Register Content </h1>}
+
+      {selectedTab === 2 && selectedMenu === "SearchShop" && <h1>Shop Search</h1>}
+      {selectedTab === 2 && selectedMenu === "RegisterShop" && <h1>Shop Register</h1>}
+
+      {selectedTab === 3 && <h1>Account Content</h1>}
     </Content>
   )
 }
