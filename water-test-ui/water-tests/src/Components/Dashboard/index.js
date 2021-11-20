@@ -33,7 +33,7 @@ const Dashboard = () => {
             </Menu.Item>
           </Menu>
         </Header>
-        <Layout>
+        <Layout style={{ minHeight: "85vh", display: "flex" }}>
           {selectedTab === 1 && <WaterTreatmentSubmenu />}
           {selectedTab === 2 && <ShopInventorySubmenu />}
           <Layout style={{ padding: "0 24px 24px" }}>
