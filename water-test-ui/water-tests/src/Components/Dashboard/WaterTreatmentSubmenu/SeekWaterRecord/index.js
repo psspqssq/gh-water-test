@@ -3,53 +3,48 @@ import useToken from "../../../../Middleware/useToken"
 
 import axios from "axios"
 import { Spin } from "antd"
+import WaterRecord from "./WaterRecord"
 export const SeekWaterRecord = (props) => {
 
   const { token } = useToken()
-  const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [data, setData] = useState(null)
 
-  const boilerwater = [
-    "boilerwater",
-    "feedwater",
-    "condensatewater",
-    "rawwater",
-    "softwater"
-  ]
-  const coolingtower = [
-    "blowmoldglycolwater",
-    "coolingtowerwater",
-    "chilledglycolwater"
-  ]
-
-  switch(props.type){
-    case "Boiler": 
-                  var requests = boilerwater.map((url)=>{
-                    return axios.get("http://localhost:8080/api/"+url,{params: {token}})
-                  })
-    break
-  }
   useEffect(()=>{
-    Promise.allSettled(requests).then((responses) => {
-      setData(responses)
-      
-    }).finally(setLoading(false))
-  })
+    const baseurl = "http://localhost:8080/api/"
+    const fetchData = async () =>{
+      const responseBoilerWater = await axios(baseurl + "boilerwater", {params:{token}}).catch((error)=>{setError(error)});
+      const responseCondensateWater = await axios(baseurl + "condensatewater", {params:{token}}).catch((error)=>{setError(error)});
+      const responseFeedWater = await axios(baseurl + "feedwater", {params:{token}}).catch((error)=>{setError(error)});
+      const responseRawWater = await axios(baseurl + "rawwater", {params:{token}}).catch((error)=>{setError(error)});
+      const responseSoftWater = await axios(baseurl + "softwater", {params:{token}}).catch((error)=>{setError(error)});
 
+      setData({boiler: responseBoilerWater, condensate: responseCondensateWater, feed: responseFeedWater, raw: responseRawWater, soft: responseSoftWater})
+    }
+    try{
+      fetchData().then(()=>{setLoading(false)})
+    }
+    catch(error){
+      setError(error)
+    }
+    
+  },[token])
+
+  if (error){
+    {localStorage.clear()}
+  }
 
   if (loading) {
     return <Spin delay="50" style={{ margin: "auto" }} />
   }
+
   if (data) {
+    console.log(data)
     return (
-      <h1>
-        ID: {boilerwater._id} <br />
-        Created: {boilerwater.createdAt} <br />
-        PH: {boilerwater.ph} <br />
-        Alkalinity: {boilerwater.alkalinity} <br />
-        Conductivity: {boilerwater.conductivity} <br />
-      </h1>
+      <div>
+        <WaterRecord type = "Boiler" {...data.boiler.data}/>
+      </div>
     )
   }
   else {
