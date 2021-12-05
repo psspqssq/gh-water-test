@@ -1,15 +1,15 @@
-import React from "react"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
-import Login from "./Components/Login"
-import Dashboard from "./Components/Dashboard"
-import WaterTest from "./Components/WaterTest"
-import "./App.css"
-import useToken from "./Middleware/useToken"
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./Components/Login";
+import Dashboard from "./Components/Dashboard";
+import WaterTest from "./Components/WaterTest";
+import "./App.css";
+import useToken from "./Middleware/useToken";
 
 const App = () => {
-  const { token, setToken } = useToken()
+  const { token, setToken } = useToken();
   if (!token) {
-    return <Login setToken={setToken} />
+    return <Login setToken={setToken} />;
   }
   return (
     <BrowserRouter>
@@ -22,7 +22,7 @@ const App = () => {
         </Route>
       </Switch>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default App
+export default App;

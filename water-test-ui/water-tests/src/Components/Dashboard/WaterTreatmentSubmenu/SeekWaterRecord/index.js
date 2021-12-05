@@ -60,11 +60,13 @@ export const SeekWaterRecord = (props) => {
   if (error) {
     {
       localStorage.clear();
+      window.location.reload(false);
+      return <h1>Error loading... refresh to continue.</h1>;
     }
   }
 
   if (loading) {
-    return <Spin delay="50" style={{ margin: "auto" }} />;
+    return <Spin delay="50" size="large" style={{ margin: "auto" }} />;
   }
 
   if (data) {
