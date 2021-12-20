@@ -17,17 +17,11 @@ const BoilerInput = () => {
     if (alkalinity.value && sulfites.value && conductivity.value && ph.value && blowdown.value && boilernumber.value) {
       const baseurl = "http://localhost:8080/api/";
       const postData = async () => {
-        const responseRegisterBoilerWater = await axios(
-          baseurl + "boilerwater",
-          { alkalinity: alkalinity.value },
-          {
-            params: { token },
-          }
-        ).catch((response) => {
-          console.log("i tried");
-          console.log(response);
-        });
-      };
+        const responseRegisterBoilerWater = await axios.post(
+          baseurl + "boilerwater", { alkalinity: alkalinity.value, sulfites: sulfites.value, conductivity: conductivity.value, ph: ph.value, blowdown: blowdown.value, boilernumber: boilernumber.value }, { params: { token } }
+        )
+      }
+      postData()
     } else {
       console.log("something's missing");
     }
