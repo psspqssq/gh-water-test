@@ -32,18 +32,18 @@ const Dashboard = () => {
     <DashboardContext.Provider
       value={{
         selectedTab, setSelectedTab, selectedMenu, setSelectedMenu,
-        ...alkalinity,
-        ...sulfites,
-        ...conductivity,
-        ...ph,
-        ...blowdown,
-        ...boilernumber,
-        ...glycol,
-        ...hardness,
-        ...ptsa,
-        ...freechlorine,
-        ...location,
-        ...temperature
+        alkalinity,
+        sulfites,
+        conductivity,
+        ph,
+        blowdown,
+        boilernumber,
+        glycol,
+        hardness,
+        ptsa,
+        freechlorine,
+        location,
+        temperature
       }}
     >
       <Layout>
