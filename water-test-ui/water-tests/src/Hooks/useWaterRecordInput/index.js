@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 export const useWaterRecordInput = (type) => {
   const [value, setValue] = useState("");
@@ -39,5 +39,6 @@ export const useWaterRecordInput = (type) => {
     value,
     onChange,
     reset,
+    setValue
   };
 };

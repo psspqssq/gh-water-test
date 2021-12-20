@@ -6,6 +6,7 @@ import Logo from "../Logo";
 import WaterTreatmentSubmenu from "./WaterTreatmentSubmenu";
 import DashboardContent from "./DashboardContent";
 import ShopInventorySubmenu from "./ShopInventorySubmenu";
+import { useWaterRecordInput } from "../../Hooks/useWaterRecordInput";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -15,9 +16,35 @@ export const DashboardContext = createContext(0);
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState(1);
   const [selectedMenu, setSelectedMenu] = useState(1);
+  const { ...alkalinity } = useWaterRecordInput("alkalinity");
+  const { ...sulfites } = useWaterRecordInput("sulfites");
+  const { ...conductivity } = useWaterRecordInput("conductivity");
+  const { ...ph } = useWaterRecordInput("ph");
+  const { ...blowdown } = useWaterRecordInput("blowdown");
+  const { ...boilernumber } = useWaterRecordInput("boilernumber");
+  const { ...glycol } = useWaterRecordInput("glycol");
+  const { ...hardness } = useWaterRecordInput("hardness");
+  const { ...ptsa } = useWaterRecordInput("ptsa");
+  const { ...freechlorine } = useWaterRecordInput("freechlorine");
+  const { ...location } = useWaterRecordInput("location");
+  const { ...temperature } = useWaterRecordInput("temperature");
   return (
     <DashboardContext.Provider
-      value={{ selectedTab, setSelectedTab, selectedMenu, setSelectedMenu }}
+      value={{
+        selectedTab, setSelectedTab, selectedMenu, setSelectedMenu,
+        ...alkalinity,
+        ...sulfites,
+        ...conductivity,
+        ...ph,
+        ...blowdown,
+        ...boilernumber,
+        ...glycol,
+        ...hardness,
+        ...ptsa,
+        ...freechlorine,
+        ...location,
+        ...temperature
+      }}
     >
       <Layout>
         <Header className="header">
