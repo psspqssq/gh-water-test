@@ -25,18 +25,23 @@ const BoilerInput = () => {
     ) {
       const baseurl = "http://localhost:8080/api/";
       const postData = async () => {
-        const responseRegisterBoilerWater = await axios.post(
-          baseurl + "boilerwater",
-          {
-            alkalinity: alkalinity.value,
-            sulfites: sulfites.value,
-            conductivity: conductivity.value,
-            ph: ph.value,
-            blowdown: blowdown.value,
-            boilernumber: boilernumber.value,
-          },
-          { params: { token } }
-        );
+        const responseRegisterBoilerWater = await axios
+          .post(
+            baseurl + "boilerwater",
+            {
+              alkalinity: alkalinity.value,
+              sulfites: sulfites.value,
+              conductivity: conductivity.value,
+              ph: ph.value,
+              blowdown: blowdown.value,
+              boilernumber: boilernumber.value,
+            },
+            { params: { token } }
+          )
+          .then((response) => {
+            console.log(response);
+            // Do success stuff (modal with done and add another etc...)
+          });
       };
       postData();
     } else {
