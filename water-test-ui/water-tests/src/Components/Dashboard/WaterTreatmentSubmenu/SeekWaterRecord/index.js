@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useToken from "../../../../Middleware/useToken";
 import { Row, Col } from "antd";
+import { DashboardContext } from "../..";
 
 import axios from "axios";
 import { Spin } from "antd";
@@ -10,7 +11,7 @@ export const SeekWaterRecord = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-
+  const { selectedMenu } = useContext(DashboardContext);
   useEffect(() => {
     const baseurl = "http://localhost:8080/api/";
     const fetchData = async () => {
@@ -39,6 +40,14 @@ export const SeekWaterRecord = (props) => {
       }).catch((error) => {
         setError(error);
       });
+      const responseBlowmoldGlycolWater = await axios(
+        baseurl + "blowmoldglycolwater",
+        {
+          params: { token },
+        }
+      ).catch((error) => {
+        setError(error);
+      });
 
       setData({
         boiler: responseBoilerWater,
@@ -46,6 +55,7 @@ export const SeekWaterRecord = (props) => {
         feed: responseFeedWater,
         raw: responseRawWater,
         soft: responseSoftWater,
+        blowmoldglycol: responseBlowmoldGlycolWater,
       });
     };
     try {
@@ -73,21 +83,38 @@ export const SeekWaterRecord = (props) => {
     console.log(data);
     return (
       <Row gutter={[16, 16]} justify="center" align="middle">
-        <Col>
-          <WaterRecord type="Boiler" {...data.boiler.data} />
-        </Col>
-        <Col>
-          <WaterRecord type="Condensate" {...data.condensate.data} />
-        </Col>
-        <Col>
-          <WaterRecord type="Feed" {...data.feed.data} />
-        </Col>
-        <Col>
-          <WaterRecord type="Raw" {...data.raw.data} />
-        </Col>
-        <Col>
-          <WaterRecord type="Soft" {...data.soft.data} />
-        </Col>
+        {selectedMenu == "SeekBoiler" && (
+          <Col>
+            <WaterRecord type="Boiler" {...data.boiler.data} />
+          </Col>
+        )}
+        {selectedMenu == "SeekBoiler" && (
+          <Col>
+            <WaterRecord type="Condensate" {...data.condensate.data} />
+          </Col>
+        )}
+        {selectedMenu == "SeekBoiler" && (
+          <Col>
+            <WaterRecord type="Feed" {...data.feed.data} />
+          </Col>
+        )}
+        {selectedMenu == "SeekCoolingTower" && (
+          <Col>
+            <WaterRecord type="Raw" {...data.raw.data} />
+          </Col>
+        )}
+
+        {selectedMenu == "SeekCoolingTower" && (
+          <Col>
+            <WaterRecord type="BlowmoldGlycol" {...data.blowmoldglycol.data} />
+          </Col>
+        )}
+
+        {selectedMenu == "SeekBoiler" && (
+          <Col>
+            <WaterRecord type="Soft" {...data.soft.data} />
+          </Col>
+        )}
       </Row>
     );
   } else {

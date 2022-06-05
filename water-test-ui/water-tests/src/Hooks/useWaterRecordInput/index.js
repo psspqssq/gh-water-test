@@ -24,8 +24,6 @@ export const useWaterRecordInput = (type) => {
       case "words":
         setValue(event.target.value);
         break;
-      case "nayke":
-        setValue("Nayke");
       default:
         break;
     }
@@ -39,6 +37,6 @@ export const useWaterRecordInput = (type) => {
     value,
     onChange,
     reset,
-    setValue
+    setValue,
   };
 };

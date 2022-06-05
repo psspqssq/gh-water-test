@@ -4,8 +4,8 @@ import { Input, Button, Form } from "antd";
 import axios from "axios";
 import useToken from "../../../../../Middleware/useToken";
 const { Item } = Form;
-const SoftWaterInput = () => {
-  const { hardness, conductivity, ph } = useContext(DashboardContext);
+const BlowmoldGlycolLoopInput = () => {
+  const { conductivity, ph, glycol } = useContext(DashboardContext);
 
   const formatting = { whiteSpace: "normal" };
   const buttonFormatting = {
@@ -14,15 +14,15 @@ const SoftWaterInput = () => {
   };
   const { token } = useToken();
   const handleSubmit = () => {
-    if (hardness.value && conductivity.value && ph.value) {
+    if (conductivity.value && ph.value && glycol.value) {
       const baseurl = "http://localhost:8080/api/";
       const postData = async () => {
-        const responseRegisterSoftWater = await axios.post(
-          baseurl + "softwater",
+        const responseRegisterCondensateWater = await axios.post(
+          baseurl + "blowmoldglycolwater",
           {
-            hardness: hardness.value,
             conductivity: conductivity.value,
             ph: ph.value,
+            glycol: glycol.value,
           },
           { params: { token } }
         );
@@ -35,14 +35,14 @@ const SoftWaterInput = () => {
 
   return (
     <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }}>
-      <Item label="Hardness">
-        <Input {...hardness} style={formatting}></Input>
-      </Item>
       <Item label="Conductivity">
         <Input {...conductivity} style={formatting}></Input>
       </Item>
       <Item label="PH">
         <Input {...ph} style={formatting}></Input>
+      </Item>
+      <Item label="Glycol">
+        <Input {...glycol} style={formatting}></Input>
       </Item>
       <br />
       <Item wrapperCol={{ offset: 1, span: 20 }}>
@@ -54,4 +54,4 @@ const SoftWaterInput = () => {
   );
 };
 
-export default SoftWaterInput;
+export default BlowmoldGlycolLoopInput;

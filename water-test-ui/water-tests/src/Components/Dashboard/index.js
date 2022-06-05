@@ -31,7 +31,10 @@ const Dashboard = () => {
   return (
     <DashboardContext.Provider
       value={{
-        selectedTab, setSelectedTab, selectedMenu, setSelectedMenu,
+        selectedTab,
+        setSelectedTab,
+        selectedMenu,
+        setSelectedMenu,
         alkalinity,
         sulfites,
         conductivity,
@@ -43,7 +46,7 @@ const Dashboard = () => {
         ptsa,
         freechlorine,
         location,
-        temperature
+        temperature,
       }}
     >
       <Layout>

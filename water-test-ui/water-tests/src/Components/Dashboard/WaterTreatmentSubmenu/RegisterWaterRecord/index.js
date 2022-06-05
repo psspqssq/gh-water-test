@@ -6,6 +6,7 @@ import CondensateInput from "./CondensateInput";
 import FeedWaterInput from "./FeedWaterInput";
 import RawWaterInput from "./RawWaterInput";
 import SoftWaterInput from "./SoftWaterInput";
+import BlowmoldGlycolLoopInput from "./BlowmoldGlycolLoopInput";
 
 const { Option } = Select;
 
@@ -40,12 +41,17 @@ export const RegisterWaterRecord = (props) => {
         <label>
           <b>Record Type:</b>{" "}
         </label>
-        <Select defaultValue="BoilerRecord" style={selectFormatting} onChange={handleRecordTypeChange}>
+        <Select
+          defaultValue="BoilerRecord"
+          style={selectFormatting}
+          onChange={handleRecordTypeChange}
+        >
           <Option value="BoilerRecord">Boiler Record</Option>
           <Option value="CondensateRecord">Condensate Record</Option>
           <Option value="FeedWaterRecord">Feed Water Record</Option>
           <Option value="RawWaterRecord">Raw Water Record</Option>
           <Option value="SoftWaterRecord">Soft Water Record</Option>
+          <Option value="PlantGlycolWaterRecord">Plant Glycol Loop</Option>
         </Select>
       </div>
       <br />
@@ -56,6 +62,9 @@ export const RegisterWaterRecord = (props) => {
       {recordType == "FeedWaterRecord" && <FeedWaterInput></FeedWaterInput>}
       {recordType == "RawWaterRecord" && <RawWaterInput></RawWaterInput>}
       {recordType == "SoftWaterRecord" && <SoftWaterInput></SoftWaterInput>}
+      {recordType == "PlantGlycolWaterRecord" && (
+        <BlowmoldGlycolLoopInput></BlowmoldGlycolLoopInput>
+      )}
     </Form>
   );
 };

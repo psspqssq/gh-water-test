@@ -1,11 +1,12 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { DashboardContext } from "../../../";
 import { Input, Button, Form } from "antd";
 import axios from "axios";
 import useToken from "../../../../../Middleware/useToken";
 const { Item } = Form;
 const BoilerInput = () => {
-  const { alkalinity, sulfites, conductivity, ph, blowdown, boilernumber } = useContext(DashboardContext);
+  const { alkalinity, sulfites, conductivity, ph, blowdown, boilernumber } =
+    useContext(DashboardContext);
 
   const formatting = { whiteSpace: "normal" };
   const buttonFormatting = {
@@ -14,14 +15,30 @@ const BoilerInput = () => {
   };
   const { token } = useToken();
   const handleSubmit = () => {
-    if (alkalinity.value && sulfites.value && conductivity.value && ph.value && blowdown.value && boilernumber.value) {
+    if (
+      alkalinity.value &&
+      sulfites.value &&
+      conductivity.value &&
+      ph.value &&
+      blowdown.value &&
+      boilernumber.value
+    ) {
       const baseurl = "http://localhost:8080/api/";
       const postData = async () => {
         const responseRegisterBoilerWater = await axios.post(
-          baseurl + "boilerwater", { alkalinity: alkalinity.value, sulfites: sulfites.value, conductivity: conductivity.value, ph: ph.value, blowdown: blowdown.value, boilernumber: boilernumber.value }, { params: { token } }
-        )
-      }
-      postData()
+          baseurl + "boilerwater",
+          {
+            alkalinity: alkalinity.value,
+            sulfites: sulfites.value,
+            conductivity: conductivity.value,
+            ph: ph.value,
+            blowdown: blowdown.value,
+            boilernumber: boilernumber.value,
+          },
+          { params: { token } }
+        );
+      };
+      postData();
     } else {
       console.log("something's missing");
     }
